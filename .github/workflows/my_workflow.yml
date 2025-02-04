@@ -1,29 +1,30 @@
-name: Run Python Code
+name: Run Customer & Product Analysis
 
 on:
   push:
     branches:
-      - main  # This means the workflow will run when you push to the "main" branch
+      - main  # Trigger when you push to the main branch
+  workflow_dispatch:  # Manually trigger the workflow
 
 jobs:
   run:
-    runs-on: ubuntu-latest  # This means the code will run on a virtual machine with Ubuntu
+    runs-on: ubuntu-latest  # Use a virtual machine with Ubuntu
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2  # This step gets your code from the repository
+      uses: actions/checkout@v2  # Checkout your repository code
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'  # This sets up Python (you can specify the version you need)
+        python-version: '3.x'  # Use Python 3.x
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip  # This upgrades pip (the package installer)
-        pip install -r requirements.txt  # This installs any packages you need (if you have a "requirements.txt" file)
+        python -m pip install --upgrade pip  # Upgrade pip
+        pip install -r requirements.txt  # Install dependencies from requirements.txt
 
-    - name: Run script
+    - name: Run analysis script
       run: |
-        python your_script.py  # Replace "your_script.py" with the name of your Python file
+        python analysis_script.py  # Replace with the name of your script
         
