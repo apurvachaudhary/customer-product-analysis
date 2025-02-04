@@ -1,1 +1,29 @@
+name: Run Python Code
 
+on:
+  push:
+    branches:
+      - main  # This means the workflow will run when you push to the "main" branch
+
+jobs:
+  run:
+    runs-on: ubuntu-latest  # This means the code will run on a virtual machine with Ubuntu
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # This step gets your code from the repository
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # This sets up Python (you can specify the version you need)
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip  # This upgrades pip (the package installer)
+        pip install -r requirements.txt  # This installs any packages you need (if you have a "requirements.txt" file)
+
+    - name: Run script
+      run: |
+        python your_script.py  # Replace "your_script.py" with the name of your Python file
+        
